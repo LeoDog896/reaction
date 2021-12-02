@@ -17,7 +17,7 @@
 		times = [...times.slice(0, index), ...times.slice(index + 1)]
 	}
 
-	let currentTime: Date | undefined = undefined;
+	let currentTime: number | undefined = undefined;
 
 	const buttonStages: { [index: string]: ButtonStage } = {
 		"waiting": {
@@ -46,12 +46,12 @@
 				stageIndex = "hold"
 				setTimeout(() => {
 					stageIndex = "now"
-					currentTime = new Date()
+					currentTime = Date.now()
 				}, randomNumber(3000, 6000))
 				break;
 			case "now":
 				// They clicked it during now -- Add the difference between the two times to our time array and reset to waiting.
-				times = [...times, new Date().getTime() - currentTime.getTime()]
+				times = [...times, Date.now() - currentTime]
 				currentTime = undefined;
 				stageIndex = "waiting"
 				break;
