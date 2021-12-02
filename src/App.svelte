@@ -13,6 +13,10 @@
 
 	let times: number[] = []
 
+	function removeIndexAtTimes(index: number) {
+		times = [...times.slice(0, index), ...times.slice(index + 1)]
+	}
+
 	let currentTime: Date | undefined = undefined;
 
 	const buttonStages: { [index: string]: ButtonStage } = {
@@ -63,8 +67,8 @@
 		on:click={onClick}
 	>{currentStage.text}</button>
 	<div id="dates">
-		{#each times as time}
-			<p>{time / 1000}s</p>
+		{#each times as time, i}
+			<p>{time / 1000}s <span class="clickable" on:click={() => removeIndexAtTimes(i)}> (x)</span></p>
 		{/each}
 		{#if times.length > 1}
 			<p>Average speed: {(times.reduce((a, b) => a + b) / times.length) / 1000}s</p>
@@ -73,6 +77,11 @@
 </main>
 
 <style>
+
+	.clickable {
+		cursor: pointer;
+	}
+
 	button {
 		position: fixed;
 		top: 50%;
