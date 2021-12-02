@@ -1,30 +1,62 @@
 <script lang="ts">
-	export let name: string;
+
+	enum ButtonColor {
+		WAITING = "#42a1f5",
+		HOLD = "#f5da42",
+		NOW = "#15eb47"
+	}
+
+	interface ButtonStage {
+		color: ButtonColor,
+		text: string
+	}
+
+	let times: Date[] = []
+
+	const buttonStages: { [index: string]: ButtonStage } = {
+		"waiting": {
+			color: ButtonColor.WAITING,
+			text: "Click to measure reaction speed"
+		},
+		"hold": {
+			color: ButtonColor.HOLD,
+			text: "Wait..."
+		},
+		"now": {
+			color: ButtonColor.NOW,
+			text: "NOW!"
+		}
+	}
+
+	let stageIndex = "waiting"
+	$: currentStage = buttonStages[stageIndex]
+
+	function onClick() {
+		switch(stageIndex) {
+			case "waiting":
+				break;
+			case "hold":
+				break;
+			case "now":
+				break;
+		}
+	}
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<button 
+		style="background-color: {currentStage.color}"
+		on:click={onClick}
+	>{currentStage.text}</button>
 </main>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	button {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-size: 3rem;
+		color: white;
 	}
 </style>
