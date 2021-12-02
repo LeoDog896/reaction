@@ -61,6 +61,10 @@
 	}
 </script>
 
+<svelte:window on:keydown={(event) => { 
+	if (event.key == "Space" || event.key == "Enter")
+		onClick()
+	}} />
 <main>
 	<button 
 		style="background-color: {currentStage.color}"
@@ -68,15 +72,33 @@
 	>{currentStage.text}</button>
 	<div id="dates">
 		{#each times as time, i}
-			<p>{time / 1000}s <span class="clickable" on:click={() => removeIndexAtTimes(i)}> (x)</span></p>
+			<span class="time">{time / 1000}s <span class="clickable" on:click={() => removeIndexAtTimes(i)}> (x)</span></span>
 		{/each}
 		{#if times.length > 1}
-			<p>Average speed: {(times.reduce((a, b) => a + b) / times.length) / 1000}s</p>
+			<span class="right">Average speed: {(times.reduce((a, b) => a + b) / times.length) / 1000}s</span>
 		{/if}
 	</div>
 </main>
 
 <style>
+
+	.right {
+		float: right;
+	}
+
+	.time {
+		margin-right: 5px;
+	}
+
+	#dates {
+		position: fixed;
+		top: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.7);
+		color: white;
+		width: 100vw;
+		padding: 10px;
+	}
 
 	.clickable {
 		cursor: pointer;
