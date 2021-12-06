@@ -96,7 +96,7 @@
 		left: 0;
 		background-color: rgba(0, 0, 0, 0.7);
 		color: white;
-		width: 100vw;
+		width: calc(100vw - 20px);
 		padding: 10px;
 	}
 
