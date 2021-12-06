@@ -61,8 +61,8 @@
 	}
 </script>
 
-<svelte:window on:keydown={(event) => { 
-	if (event.key == "Space" || event.key == "Enter")
+<svelte:window on:keydown={(event) => {
+	if (event.key == " " || event.key == "Enter")
 		onClick()
 	}} />
 <main>
@@ -75,7 +75,7 @@
 			<span class="time">{time / 1000}s <span class="clickable" on:click={() => removeIndexAtTimes(i)}> (x)</span></span>
 		{/each}
 		{#if times.length > 1}
-			<span class="right">Average speed: {(times.reduce((a, b) => a + b) / times.length) / 1000}s</span>
+			<span class="right">~{(times.reduce((a, b) => a + b) / times.length) / 1000}s</span>
 		{/if}
 	</div>
 </main>
