@@ -62,7 +62,7 @@
 </script>
 
 <svelte:window on:keydown={(event) => {
-	if (event.key == " " || event.key == "Enter")
+	if (!event.repeat && (event.key == " " || event.key == "Enter"))
 		onClick()
 	}} />
 <main>
